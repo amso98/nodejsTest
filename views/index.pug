@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css")
+        title La Paz Cloud
+    body
+        section.hero.is-fullheight.has-background-warning
+            .hero-body
+                .container.has-text-centered
+                    a(href="https://github.com/lapazcloud", target="_blank")
+                        img(src="/logo.png")
+
+            if process.env.HOSTNAME && process.env.NODE_VERSION
+                .hero-footer
+                    .container.has-text-centered.is-family-code
+                        p Served by #{process.env.HOSTNAME} with NodeJS #{process.env.NODE_VERSION}

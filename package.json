@@ -1,0 +1,26 @@
+{
+  "name": "sample-app-lapazcloud",
+  "version": "0.0.1",
+  "description": "This is a sample app to run on Kubernetes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lapazcloud/sample-app.git"
+  },
+  "author": "La Paz Cloud <comunidad@lapazcloud.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lapazcloud/sample-app/issues"
+  },
+  "homepage": "https://github.com/lapazcloud/sample-app#readme",
+  "dependencies": {
+    "@cloudnative/health-connect": "^1.0.2",
+    "express": "^4.16.4",
+    "lightship": "^3.0.1",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3"
+  }
+}
