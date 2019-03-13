@@ -1,0 +1,64 @@
+Master:
+  InstallPlugins:
+    - kubernetes:1.12.6
+    - workflow-job:2.31
+    - workflow-aggregator:2.5
+    - credentials-binding:1.16
+    - git:3.9.1
+    - google-oauth-plugin:0.6
+    - google-source-plugin:0.3
+    - jdk-tool:1.2
+    - command-launcher:1.3
+    - job-dsl:1.70
+  Cpu: "1"
+  Memory: "3500Mi"
+  JavaOpts: "-Xms3500m -Xmx3500m"
+  ServiceType: ClusterIP
+
+  JCasC:
+    enabled: true
+    PluginVersion: 1.7
+    SupportPluginVersion: 1.7
+    ConfigScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: Welcome to our CI/CD La Paz Cloud server.  This Jenkins is configured and managed 'as code'.
+      initial-jobs: |
+        jobs:
+          - script: >
+              multibranchPipelineJob('sample-app') {
+                branchSources {
+                  git {
+                    remote('https://github.com/darvein/sample-app.git')
+                  }
+                  triggers {
+                    periodic(60)
+                  }
+                }
+              }
+          - script: >
+              freeStyleJob('test-wait') {
+                displayName('Test Wait Load')
+                  steps {
+                    shell('sleep 30')
+                    queue('my-seed-job')
+                  }
+              }
+
+
+Agent:
+  Enabled: true
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+Persistence:
+  Size: 100Gi
+NetworkPolicy:
+  ApiVersion: networking.k8s.io/v1
+rbac:
+  install: true
+  serviceAccountName: cicd-jenkins

@@ -1,0 +1,8 @@
+# PreProd
+
+nameOverride: "sampleapp"
+replicaCount: 1
+image:
+  repository: bitnami/node-example
+  tag: 0.0.1
+  pullPolicy: IfNotPresent
